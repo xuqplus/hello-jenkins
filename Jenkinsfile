@@ -8,4 +8,11 @@ node("win10") {
             ''')
         }
     }
+    stage("Step 2") {
+        dir('ngrok-jenkins') {
+            powershell('''
+                docker build -t hello-jenkins .
+            ''')
+        }
+    }
 }
