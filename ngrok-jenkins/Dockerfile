@@ -8,6 +8,7 @@ RUN tar -xzvf ngrok-*.tgz && rm -rf ngrok-*.tgz && mkdir /run/nginx/
 
 COPY default.conf /etc/nginx/http.d/
 COPY index.html /var/lib/nginx/html/
+COPY favicon.png /var/lib/nginx/html/
 
 EXPOSE 80 4040
 
