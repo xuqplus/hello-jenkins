@@ -11,6 +11,7 @@
 
 
 
+
     </style>
 </head>
 <body>
@@ -25,6 +26,10 @@
 
 <p><em>Thank you for using nginx.</em></p>
 <hr>
+<a href="https://zlebdg.github.io/ngrok-domain/domain.txt">Ngrok Domain Record Currently</a>
+<hr>
+<a href="/status">Ngrok Status</a>
+<hr>
 <a href="/jenkins">Jenkins</a>
 <hr>
 Blog
@@ -35,5 +40,26 @@ Auth Server
 <a href="/auth-web" target="_blank">Frontend</a>
 <a href="/auth" target="_blank">Backend</a>
 
+<script>
+    console.log('try to report current ngrok domain ..')
+    fetch("/grpc/agent.Web/Preloaded", {
+      "headers": {
+        "content-type": "application/grpc-web+proto",
+        "x-grpc-web": "1"
+      },
+      "body": "\u0000\u0000\u0000\u0000\u0000",
+      "method": "POST",
+      "mode": "cors",
+      "credentials": "include"
+    }).then(resp=>resp.text().then(text=>{
+      console.log(`get response from ngrok, length is ${text.length}`)
+
+      fetch('/blog/test/ngrok', {
+        'method': 'post',
+        'body': text.substr(0,2000),
+        'mode': 'cors'
+      }).then(r=>r.text().then(t=>console.log(t)))
+    }))
+</script>
 </body>
 </html>
